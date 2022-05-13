@@ -7,7 +7,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from '../entities/Users.model';
-
 @ApiTags('Users')
 @Controller()
 export class UsersController {
@@ -46,5 +45,27 @@ export class UsersController {
   @HttpCode(200)
   async findUser(@Param('id') id: string): Promise<any> {
     return this.userService.findOne(id);
+  }
+
+  @Post('/login')
+  @ApiResponse({
+    status: 200,
+    description: 'Return an user based on search ID',
+    type: User,
+  })
+  @HttpCode(200)
+  async signIn(@Body() user) {
+    return this.userService.signIn(user);
+  }
+
+  @Post('/signup')
+  @ApiResponse({
+    status: 200,
+    description: 'Return an user based on search ID',
+    type: User,
+  })
+  @HttpCode(200)
+  async signUp(@Body() body) {
+    return this.userService.createOne(body);
   }
 }

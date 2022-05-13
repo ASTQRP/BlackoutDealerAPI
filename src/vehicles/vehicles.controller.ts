@@ -79,4 +79,21 @@ export class VehiclesController {
   async removeVehicle(@Param('id') id: string): Promise<any> {
     return this.vehicleService.removeOne(id);
   }
+
+  @Get('/get/all/s3')
+  @ApiResponse({
+    status: 200,
+    description: 'The found record',
+    type: Vehicle,
+  })
+  @HttpCode(200)
+  async getS3Objects(): Promise<any> {
+    let vehicles: Vehicle[];
+
+    vehicles = await this.vehicleService
+      .getAllS3Objects()
+      .then((response) => response);
+
+    return vehicles;
+  }
 }

@@ -7,7 +7,7 @@ import { Buffer } from 'buffer';
 export class S3Service {
   private _configService: ConfigService;
   private s3Service: AWS.S3;
-
+  private;
   constructor() {
     this.initialize();
   }
@@ -31,14 +31,14 @@ export class S3Service {
    *
    */
 
-  async S3Upload(base64: string, ileIdentifier: string) {
+  async S3Upload(base64: string, fileIdentifier: string) {
     let k: string = base64.replace(/^data:image\/\w+;base64,/, '');
     const base64Data = Buffer.from(k, 'base64');
     const type = base64.split(';')[0].split('/')[1];
 
     const params = {
       Bucket: 'dealer-images-bucket',
-      Key: ileIdentifier,
+      Key: fileIdentifier,
       Body: base64Data,
       ContentType: type,
     };
@@ -48,6 +48,24 @@ export class S3Service {
       return s3Response.Location.toString();
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  async S3GetAllFiles() {
+    try {
+      let dataImages: string[] = [];
+      let S3Response = await this.s3Service
+        .listObjects({ Bucket: 'dealer-images-bucket' })
+        .promise();
+
+      S3Response.Contents.forEach((item) => {
+        dataImages.push(
+          `https://dealer-images-bucket.s3.amazonaws.com/${item.Key}`,
+        );
+      });
+      return dataImages;
+    } catch (error) {
+      console.log(error);
     }
   }
 }

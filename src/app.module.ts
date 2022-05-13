@@ -22,7 +22,6 @@ import { PhotosModule } from './photos/photos.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { join } from 'path';
 
 import configuration from './config/configuration';
 @Module({
@@ -33,9 +32,6 @@ import configuration from './config/configuration';
       envFilePath: '.env',
       isGlobal: true,
       load: [configuration],
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client'),
     }),
     SequelizeModule.forRoot({
       dialect: 'mysql',
@@ -68,7 +64,6 @@ import configuration from './config/configuration';
     BrandsModule,
     ModelsModule,
     VehicleTypesModule,
-
     RouterModule.register([
       { path: 'users', module: UsersModule },
       { path: 'vehicles', module: VehiclesModule },

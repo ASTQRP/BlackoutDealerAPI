@@ -18,7 +18,6 @@ export class PhotosService {
     return photo;
   }
   async findMultiplePhotos(id: string | number) {
-    // const photos =
     return await this.photoModel.findAll({ where: { VehicleID: id } });
   }
   async removeOne(id: string): Promise<IResponseMessage> {

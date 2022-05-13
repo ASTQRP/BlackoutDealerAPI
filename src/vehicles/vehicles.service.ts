@@ -10,6 +10,7 @@ import { PhotosService } from 'src/photos/photos.service';
 import { Photo } from 'src/entities/Photo.model';
 import { S3Service } from 'src/aws/s3.controller';
 import { Error } from 'sequelize';
+import { any } from 'joi';
 @Injectable()
 export class VehiclesService {
   photoService: PhotosService;
@@ -44,9 +45,27 @@ export class VehiclesService {
   }
 
   async getAll() {
-    const vehicles = await this.vehicleModel.findAll({
-      include: this.getVehicleDataParams,
-    });
+    type reponse = {
+      data: any;
+      message: string;
+    };
+    let vehicles: Vehicle[];
+
+    try {
+      vehicles = await this.vehicleModel
+        .findAll({
+          include: this.getVehicleDataParams,
+        })
+        .then((vehiclesFound: Vehicle[]) => {
+          return vehiclesFound;
+        })
+        .catch((err) => {
+          console.log('====================================');
+          console.log(err);
+          console.log('====================================');
+          return [];
+        });
+    } catch (error) {}
 
     return vehicles;
   }
@@ -156,5 +175,14 @@ export class VehiclesService {
           : error.name;
     }
     return message;
+  }
+  async getAllS3Objects() {
+    let data = this.filesService
+      .S3GetAllFiles()
+      .then(async (S3Response: any) => {
+        return S3Response;
+      });
+
+    return data;
   }
 }

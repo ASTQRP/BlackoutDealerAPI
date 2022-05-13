@@ -8,7 +8,7 @@ import {
 
 import { Brand } from './VehicleBrands.model';
 
-@Table({ modelName: 'model', createdAt: false, updatedAt: false })
+@Table({ modelName: 'Model', createdAt: false, updatedAt: false })
 export class VehicleModel extends Model {
   @Column({ primaryKey: true, autoIncrement: true })
   ModelID: number;
