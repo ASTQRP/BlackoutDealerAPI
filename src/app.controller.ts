@@ -23,12 +23,9 @@ import {
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('/main')
-  async Main(
-    @Response() response: Response,
-    @Request() request: Request,
-  ): Promise<any> {
-    let result = this.appService.data();
+  @Get('/')
+  Main(): string {
+    let result = this.appService.GetHelloWorld();
     return result;
   }
 }
