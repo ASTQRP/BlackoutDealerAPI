@@ -8,18 +8,18 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  app.use(bodyParser.json({ limit: '50mb' }));
-  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-  app.enableCors();
+  // app.use(bodyParser.json({ limit: '50mb' }));
+  // app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+  // app.enableCors();
 
-  const config = new DocumentBuilder()
-    .setTitle('Dealer API example')
-    .setDescription('The Dealer API description')
-    .setVersion('1.0')
-    .build();
+  // const config = new DocumentBuilder()
+  //   .setTitle('Dealer API example')
+  //   .setDescription('The Dealer API description')
+  //   .setVersion('1.0')
+  //   .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  // const document = SwaggerModule.createDocument(app, config);
+  // SwaggerModule.setup('api', app, document);
 
   await app.listen(port);
 }
