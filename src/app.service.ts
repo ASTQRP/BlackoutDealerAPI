@@ -5,7 +5,7 @@ import { join } from 'path';
 export class AppService {
   constructor() {}
 
-  GetHelloWorld(): string {
-    return 'Hello World!';
+  GetHelloWorld(): any {
+    return { message: 'Hello World!' };
   }
 }
