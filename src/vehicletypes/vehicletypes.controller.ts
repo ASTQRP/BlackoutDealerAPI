@@ -23,6 +23,7 @@ export class VehicleTypesController {
   @HttpCode(200)
   async getAll(): Promise<any> {
     const data = await this.vehicleTypesService.getAll();
+
     return data;
   }
 

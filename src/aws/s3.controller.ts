@@ -7,7 +7,6 @@ import { Buffer } from 'buffer';
 export class S3Service {
   private _configService: ConfigService;
   private s3Service: AWS.S3;
-  private;
   constructor() {
     this.initialize();
   }

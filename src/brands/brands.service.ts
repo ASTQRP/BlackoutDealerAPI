@@ -21,6 +21,7 @@ export class BrandsService {
 
     return vehicles;
   }
+
   async findBrandById(id: string) {
     const vehicle = await this.brandModel
       .findOne({
